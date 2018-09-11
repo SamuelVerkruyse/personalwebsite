@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function scope example</title>
+  <style>
+      
+	body {
+		margin: 40px;
+	}
+	#container {
+		display: grid;
+        margin: auto;
+        grid-gap: 1px;
+		grid-template-columns: repeat(16, 50px);
+        grid-template-rows: repeat(16, 50px);
+        background-color: black;
+        height: 816px;
+        width: 816px;
+
+	}
+
+	.content {
+		background-color: #ffffff;
+		color: #fff;
+        grid-area: auto;
+		padding: 20px;
+		font-size: 150%;
+
+	}
+
+
+   
+  </style>
+</head>
+<body>
+  <div id="container">
+
+  </div>
+
+  <script>
+        const container = document.querySelector('#container');
+        let content;
+        for(let i = 0; i < 256; i++){
+            content = document.createElement('div');
+            content.classList.add(`content`);
+            //content.style.backgroundcolor = 'black';
+            
+            content.className += " c" + i;
+            content.addEventListener('mouseover', () => {
+                //alert(`Hello World ${i}`);
+                let temp = document.querySelector(`.c${i}`);
+                let opacity;
+                if(temp.getAttribute('style') !== null){
+                    console.log(temp.getAttribute('style').split(','));
+                    opacity = Number(temp.getAttribute('style').split(',')[2].split('%')[0]);
+                    if(opacity > 0){
+                        opacity -= 10;
+                    }
+                }
+                else{
+                    opacity = 90;
+                }
+                console.log(opacity);
+                temp.setAttribute('style',`background-color: hsl(${Math.floor(Math.random() * 100)},${Math.floor(Math.random() * 100)}%, ${Number(opacity)}%)`);
+                //console.log(t)
+            });
+            container.appendChild(content);
+
+        }
+        const paragraph = document.createElement('p');
+        paragraph.classList.add('paragraph')
+        paragraph.textContent = "Hey I'm red";
+        paragraph.setAttribute('style', 'color: red');
+        container.appendChild(paragraph)
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function scope example</title>
+</head>
+<body>
+  
+  <script>
+    
+    function computerPlay(){
+        var choices = ["Rock", "Paper", "Scissors"];
+        return choices[Math.floor(Math.random() * 3)]
+    }
+    function playRound(playerSelection, computerSelection){
+        console.log(playerSelection);
+        playerSelection = playerSelection.toUpperCase();
+        computerSelection = computerSelection.toUpperCase();
+        if(playerSelection.toUpperCase() === computerSelection.toUpperCase()){
+            return `It's a tie! You both played ${playerSelection}`
+        }
+
+        if(playerSelection.toUpperCase() === "ROCK"){
+            if(computerSelection.toUpperCase() === "PAPER"){
+                return `You Lose! ${computerSelection} beats ${playerSelection}`
+            }
+            else{
+                return  `You Win! ${playerSelection} beats ${computerSelection}`
+            }
+        }
+
+        if(playerSelection.toUpperCase() === "PAPER"){
+            if(computerSelection.toUpperCase() === "SCISSORS"){
+                return `You Lose! ${computerSelection} beats ${playerSelection}`
+            }
+            else{
+                return  `You Win! ${playerSelection} beats ${computerSelection}`
+            }
+        }
+
+        if(playerSelection.toUpperCase() === "SCISSORS"){
+            if(computerSelection.toUpperCase() === "ROCK"){
+                return `You Lose! ${computerSelection} beats ${playerSelection}`
+            }
+            else{
+                return  `You Win! ${playerSelection} beats ${computerSelection}`
+            }
+        }
+    }
+
+    function game(){
+        let win = 0;
+        for(let i = 0; i < 5; i++){
+            if(playRound(prompt("Enter Your Choice"), computerPlay()).includes("Win")){
+                console.log(win);
+                win++;
+            }
+        }
+        if(win > 2){
+            alert("YOU WIN!");
+        }
+        else{
+            alert("YOU LOSE!");
+        }
+    }
+
+    console.log(playRound('rock', computerPlay()))
+  </script>
+</body>
+</html>
